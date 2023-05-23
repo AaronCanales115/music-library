@@ -1,14 +1,18 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function GalleryItem({item}){
     
     let [view, setView] = useState(false)
     let {
         trackName,
-        colletctionName,
+        collectionName,
         primaryGenreName,
         releaseDate,
-        artworkUrl100
+        artworkUrl100,
+        artistId,
+        trackId,
+        collectionId
     } = item
 
     const simpleStyle = {
@@ -31,14 +35,23 @@ export default function GalleryItem({item}){
     const simpleView = () => {
         return <div style={simpleStyle}>
             <h3>{trackName}</h3>
-            <h4>{colletctionName}</h4>
+            <h4>{collectionName}</h4>
 
         </div>
     }
     const detailView = () => {
         return <div style={detailStyle}>
-            <h3>{trackName}</h3>
-            <h4>{colletctionName}</h4>
+
+            <h3>
+                <Link to={`/artist/${artistId || trackId}`}>
+                    {trackName}
+                </Link>
+            </h3>
+            <h3>
+                <Link to={`/album/${collectionId}`}>
+                    {collectionName}
+                </Link>
+            </h3>
             <h4>{primaryGenreName}</h4>
             <h4>{releaseDate}</h4>
 
